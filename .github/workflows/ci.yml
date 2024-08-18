@@ -30,7 +30,7 @@ jobs:
 
       # Run the custom script to start the server and run Playwright tests
       - name: Run E2E Tests
-        run: npx ts-node start-server-and-test.ts
+        run: npx ts-node ./start-server-and-test.ts
 
       # Optionally, stop Nx Cloud agents after E2E tests
       - run: npx nx-cloud stop-agents
