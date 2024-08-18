@@ -28,8 +28,13 @@ jobs:
       # Build the project
       - run: npx nx build frontend --verbose
 
+      # Install Playwright Browsers
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
       # Start the server and run E2E tests
       - name: Start Server and Run E2E Tests
         run: |
           npx nx serve frontend &
+          sleep 10 # Ensure the server has time to start
           npx playwright test
