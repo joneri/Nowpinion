@@ -17,7 +17,9 @@ export default defineConfig({
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     cwd: workspaceRoot,
+    timeout: 90000, // Increase to 90 seconds
   },
+  
 
   projects: [
     {
