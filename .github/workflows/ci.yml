@@ -25,8 +25,20 @@ jobs:
 
       - run: npm ci --legacy-peer-deps
 
-      # Build the project
-      - run: npx nx build frontend --verbose
+      # Build the projects
+      - run: |
+          npx nx build frontend --verbose
+          npx nx build horse-betting --verbose
+
+      # Lint the projects
+      - run: |
+          npx nx lint frontend
+          npx nx lint horse-betting
+
+      # Run unit tests for the projects
+      - run: |
+          npx nx test frontend --code-coverage
+          npx nx test horse-betting --code-coverage
 
       # Install Playwright Browsers
       - name: Install Playwright Browsers
@@ -36,9 +48,16 @@ jobs:
       - name: Verify Playwright Installation
         run: ls -la ~/.cache/ms-playwright/
 
-      # Start the server and run E2E tests
-      - name: Start Server and Run E2E Tests
+      # Start the server and run E2E tests for frontend
+      - name: Start Server and Run E2E Tests for Frontend
         run: |
           npx nx serve frontend &
+          sleep 10 # Ensure the server has time to start
+          npx playwright test
+
+      # Start the server and run E2E tests for horse-betting
+      - name: Start Server and Run E2E Tests for Horse Betting
+        run: |
+          npx nx serve horse-betting &
           sleep 10 # Ensure the server has time to start
           npx playwright test
