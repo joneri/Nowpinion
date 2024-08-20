@@ -37,8 +37,8 @@ jobs:
 
       # Run unit tests for the projects
       - run: |
-          npx nx test frontend --code-coverage
-          npx nx test horse-betting --code-coverage
+          npx nx test frontend --coverage
+          npx nx test horse-betting --coverage
 
       # Install Playwright Browsers
       - name: Install Playwright Browsers
